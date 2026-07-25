@@ -543,17 +543,23 @@ display:block;
 }
 
 /* ==========================================================================
-   تنسيقات قسم العروض المخصص (Sectors Section)
+   تنسيقات قسم العروض المخصص (Sectors Section - Slider Version)
    ========================================================================== */
 .sectors-custom-section {
     padding: 100px 0;
     position: relative;
     overflow: hidden;
+    background: #000000;
+}
+
+.sectors-relative-container {
+    position: relative;
+    padding: 0 50px; /* مساحة جانبية لأسهم التنقل */
 }
 
 .sectors-custom-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .sectors-custom-header .sect-subtitle {
@@ -573,15 +579,24 @@ display:block;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-.sectors-custom-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 25px;
-    position: relative;
-    z-index: 2;
+/* حاوية السلايدر */
+.sectors-slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 15px 0;
 }
 
+.sectors-slider-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+/* الكارت الفردي بالسلايدر */
 .sect-card {
+    flex: 0 0 calc(25% - 15px); /* يظهر 4 كروت للشاشات الكبيرة */
+    min-width: 250px;
     background: rgba(12, 11, 24, 0.6);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -598,7 +613,7 @@ display:block;
     align-items: center;
 }
 
-/* تأثير التوهج الخلفي لكل كارت */
+/* خلفية التوهج */
 .sect-glow-bg {
     position: absolute;
     top: 50%;
@@ -618,7 +633,7 @@ display:block;
     opacity: 1;
 }
 
-/* تصميم تجويف الأيقونات النيون */
+/* صندوق الأيقونة */
 .sect-icon-box {
     width: 65px;
     height: 65px;
@@ -640,14 +655,16 @@ display:block;
     transform: translateY(-5px) scale(1.05);
 }
 
-/* درجات الألوان المتوهجة للأيقونات */
+/* ألوان النيون للأيقونات والكروت الجديدة */
 .cyan-neon-glow { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
 .pink-neon-glow { color: #ff2a5f; text-shadow: 0 0 10px rgba(255, 42, 95, 0.5); }
 .purple-neon-glow { color: #9d30ff; text-shadow: 0 0 10px rgba(157, 48, 255, 0.5); }
 .orange-neon-glow { color: #ff9100; text-shadow: 0 0 10px rgba(255, 145, 0, 0.5); }
 .red-neon-glow { color: #ff3333; text-shadow: 0 0 10px rgba(255, 51, 51, 0.5); }
+.blue-neon-glow { color: #007bff; text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
+.green-neon-glow { color: #28a745; text-shadow: 0 0 10px rgba(40, 167, 69, 0.5); }
 
-/* نصوص وعناوين الكروت */
+/* نصوص الكروت */
 .sect-card-title {
     font-size: 14px;
     font-weight: 500;
@@ -676,17 +693,57 @@ display:block;
     transition: color 0.3s ease;
 }
 
-/* تأثيرات التمرير الجمالية (Hover Classes) */
+/* تأثيرات الـ Hover */
 .text-cyan-hover:hover, .text-cyan-hover.active { border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15); }
 .text-pink-hover:hover, .text-pink-hover.active { border-color: rgba(255, 42, 95, 0.3); box-shadow: 0 10px 30px rgba(255, 42, 95, 0.15); }
 .text-purple-hover:hover, .text-purple-hover.active { border-color: rgba(157, 48, 255, 0.3); box-shadow: 0 10px 30px rgba(157, 48, 255, 0.15); }
 .text-orange-hover:hover, .text-orange-hover.active { border-color: rgba(255, 145, 0, 0.3); box-shadow: 0 10px 30px rgba(255, 145, 0, 0.15); }
 .text-red-hover:hover, .text-red-hover.active { border-color: rgba(255, 51, 51, 0.3); box-shadow: 0 10px 30px rgba(255, 51, 51, 0.15); }
+.text-blue-hover:hover, .text-blue-hover.active { border-color: rgba(0, 123, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15); }
+.text-green-hover:hover, .text-green-hover.active { border-color: rgba(40, 167, 69, 0.3); box-shadow: 0 10px 30px rgba(40, 167, 69, 0.15); }
 
-.sect-card:hover .sect-card-title .highlight {
-    background: linear-gradient(90deg, #ffffff, #dcdcdc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* أسهم التنقل */
+.slider-arrow {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.prev-arrow { right: 0px; }
+.next-arrow { left: 0px; }
+
+/* التكيف مع الجوال والتابلت */
+@media (max-width: 1024px) {
+    .sect-card {
+        flex: 0 0 calc(50% - 10px); /* كارتين في الشاشات المتوسطة */
+    }
+}
+
+@media (max-width: 600px) {
+    .sect-card {
+        flex: 0 0 100%; /* كارت واحد في الموبايل */
+    }
+    .sectors-relative-container {
+        padding: 0 35px;
+    }
 }
 
 
