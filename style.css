@@ -543,7 +543,7 @@ display:block;
 }
 
 /* ==========================================================================
-   تنسيقات قسم العروض المخصص (Sectors Section - Slider Version)
+   تنسيقات سلايدر القطاعات (Sectors Slider CSS)
    ========================================================================== */
 .sectors-custom-section {
     padding: 100px 0;
@@ -554,7 +554,7 @@ display:block;
 
 .sectors-relative-container {
     position: relative;
-    padding: 0 50px; /* مساحة جانبية لأسهم التنقل */
+    padding: 0 40px; /* مساحة جانبية لأسهم التنقل */
 }
 
 .sectors-custom-header {
@@ -579,23 +579,24 @@ display:block;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-/* حاوية السلايدر */
+/* حاوية السلايدر الخارجية */
 .sectors-slider-wrapper {
     width: 100%;
     overflow: hidden;
     padding: 15px 0;
 }
 
+/* المسار المفرد للتحريك */
 .sectors-slider-track {
     display: flex;
     gap: 20px;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
 }
 
-/* الكارت الفردي بالسلايدر */
+/* تصميم الكارت الفردي */
 .sect-card {
-    flex: 0 0 calc(25% - 15px); /* يظهر 4 كروت للشاشات الكبيرة */
+    flex: 0 0 calc(25% - 15px); /* 4 كروت للشاشات الكبيرة */
     min-width: 250px;
     background: rgba(12, 11, 24, 0.6);
     backdrop-filter: blur(15px);
@@ -606,14 +607,15 @@ display:block;
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.4s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
 }
 
-/* خلفية التوهج */
+/* خلفية التوهج الدائرية */
 .sect-glow-bg {
     position: absolute;
     top: 50%;
@@ -655,7 +657,7 @@ display:block;
     transform: translateY(-5px) scale(1.05);
 }
 
-/* ألوان النيون للأيقونات والكروت الجديدة */
+/* ألوان الأيقونات النيون للكروت الجديدة والقائمة */
 .cyan-neon-glow { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
 .pink-neon-glow { color: #ff2a5f; text-shadow: 0 0 10px rgba(255, 42, 95, 0.5); }
 .purple-neon-glow { color: #9d30ff; text-shadow: 0 0 10px rgba(157, 48, 255, 0.5); }
@@ -664,7 +666,7 @@ display:block;
 .blue-neon-glow { color: #007bff; text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
 .green-neon-glow { color: #28a745; text-shadow: 0 0 10px rgba(40, 167, 69, 0.5); }
 
-/* نصوص الكروت */
+/* نصوص الكارت */
 .sect-card-title {
     font-size: 14px;
     font-weight: 500;
@@ -673,7 +675,6 @@ display:block;
     margin-bottom: 15px;
     position: relative;
     z-index: 2;
-    transition: color 0.3s ease;
 }
 
 .sect-card-title .highlight {
@@ -690,10 +691,9 @@ display:block;
     line-height: 1.8;
     position: relative;
     z-index: 2;
-    transition: color 0.3s ease;
 }
 
-/* تأثيرات الـ Hover */
+/* تأثيرات الـ Hover والتفاعل */
 .text-cyan-hover:hover, .text-cyan-hover.active { border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15); }
 .text-pink-hover:hover, .text-pink-hover.active { border-color: rgba(255, 42, 95, 0.3); box-shadow: 0 10px 30px rgba(255, 42, 95, 0.15); }
 .text-purple-hover:hover, .text-purple-hover.active { border-color: rgba(157, 48, 255, 0.3); box-shadow: 0 10px 30px rgba(157, 48, 255, 0.15); }
@@ -702,10 +702,10 @@ display:block;
 .text-blue-hover:hover, .text-blue-hover.active { border-color: rgba(0, 123, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15); }
 .text-green-hover:hover, .text-green-hover.active { border-color: rgba(40, 167, 69, 0.3); box-shadow: 0 10px 30px rgba(40, 167, 69, 0.15); }
 
-/* أسهم التنقل */
+/* أسهم التنقل للسلايدر */
 .slider-arrow {
     position: absolute;
-    top: 55%;
+    top: 58%;
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
@@ -730,19 +730,19 @@ display:block;
 .prev-arrow { right: 0px; }
 .next-arrow { left: 0px; }
 
-/* التكيف مع الجوال والتابلت */
+/* الاستجابة للشاشات الصغيرة */
 @media (max-width: 1024px) {
     .sect-card {
-        flex: 0 0 calc(50% - 10px); /* كارتين في الشاشات المتوسطة */
+        flex: 0 0 calc(50% - 10px); /* 2 كارت للتابلت */
     }
 }
 
 @media (max-width: 600px) {
     .sect-card {
-        flex: 0 0 100%; /* كارت واحد في الموبايل */
+        flex: 0 0 100%; /* كارت واحد للهواتف */
     }
     .sectors-relative-container {
-        padding: 0 35px;
+        padding: 0 25px;
     }
 }
 
