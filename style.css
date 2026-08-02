@@ -2578,3 +2578,164 @@ display:block;
 .ai-whatsapp-btn:hover {
     transform: scale(1.05);
 }
+
+/* ===========================
+   Mobile Responsive
+=========================== */
+
+@media (max-width:768px){
+
+/* الهيدر */
+.nav-container{
+    flex-direction:column;
+    gap:15px;
+}
+
+.nav-menu{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+}
+
+.nav-menu a{
+    font-size:14px;
+}
+
+.nav-cta{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.btn-outline-glow{
+    width:100%;
+    max-width:280px;
+    text-align:center;
+}
+
+/* Hero */
+
+.hero{
+    padding-top:180px;
+}
+
+.hero-container{
+    grid-template-columns:1fr;
+    gap:35px;
+    text-align:center;
+}
+
+.hero-content{
+    align-items:center;
+}
+
+.hero-title{
+    font-size:34px;
+}
+
+.hero-desc{
+    max-width:100%;
+    font-size:15px;
+}
+
+.hero-actions{
+    align-items:center;
+}
+
+.btn-solid-gradient{
+    width:100%;
+    justify-content:center;
+}
+
+.hero-visual{
+    order:-1;
+}
+
+.neon-box{
+    max-width:320px;
+    margin:auto;
+}
+
+.hero-sidebar{
+    width:100%;
+}
+
+.sidebar-item{
+    padding:12px;
+}
+
+.sidebar-info h4{
+    font-size:13px;
+}
+
+.sidebar-info p{
+    font-size:11px;
+}
+
+.avatar-img{
+    width:40px;
+    height:40px;
+}
+
+/* العناوين */
+
+.sect-title,
+.proc-title,
+.works-title{
+    font-size:28px;
+}
+
+/* الباقات */
+
+.packages-grid{
+    grid-template-columns:1fr !important;
+}
+
+/* العدادات */
+
+.stats-grid-wrapper{
+    grid-template-columns:1fr;
+}
+
+.stat-box.full-width-stat{
+    grid-column:auto;
+}
+
+/* الآراء */
+
+.split-layout{
+    grid-template-columns:1fr;
+}
+
+.reviews-grid{
+    grid-template-columns:1fr;
+}
+
+}
+
+/* موبايلات صغيرة */
+
+@media (max-width:480px){
+
+.hero-title{
+    font-size:28px;
+}
+
+.hero-brand{
+    font-size:18px;
+}
+
+.btn{
+    padding:14px 20px;
+    font-size:14px;
+}
+
+.btn-solid-gradient{
+    font-size:14px;
+}
+
+.brand-logo-img{
+    width:60px;
+}
+
+}
